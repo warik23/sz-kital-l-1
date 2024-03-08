@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Szavak</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="theme.js"></script>
+</head>
+
+<body class="bg-slate-950/95  h-screen flex max-w-140 justify-center m-auto items-center">
+
+	<div class="border-2 border-white/50 rounded-md justify-center items-center m-3 h-max text-center text-[white] p-3 bg-slate-900">
+		<div class="flex flex-wrap justify-center" id="box">
+
+		</div>
+
+
+		<input class="border-2  border-slate-800 rounded-md bg-slate-800 outline-none p-1 w-69 " type="text" id="szoinp">
+		<button
+			class="border-2 border-slate-600 bg-slate-900 rounded-md text-[20px] p-1 hover:scale-105 active:scale-100 transition-all m-2" onclick="randomSzo()">Új
+			játék</button>
+
+	</div>
+
+
+</body>
+
+
+<script>
+
+	document.getElementById("szoinp").value="";
+	const words = [
+	"alma", "kutya", "ház", "számítógép", "toll", "asztal", "autó", "iskola", "kávé", "televízió",
+	"szék", "táska", "ajtó", "laptop", "szemüveg", "gyerek", "víz", "foci", "újság", "telefon",
+	"papír", "tészta", "térkép", "kert", "olvasás", "gyümölcs", "állat", "kép", "játék", "vers",
+	"épület", "étel", "számológép", "sör", "film", "zene", "könyv", "főzés", "futás", "horgászat",
+	"sport", "bicikli", "kerékpár", "torna", "tanulás", "ének", "színház", "fürdés", "alvás",
+	"sétálás", "mozgás", "úszás", "fagylalt", "pizza", "kenyér", "kutatás", "pénz", "utazás",
+	"kirándulás", "állomás", "busz", "vonat", "repülő", "strand", "park", "erdő", "hegy", "tó",
+	"folyó", "híd", "út", "ország", "város", "falucska", "szomszéd", "bolt", "piac", "étterem",
+	"kávézó", "mosoda", "gyógyszertár", "iskola", "óvoda", "egyetem", "színház", "mozi", "múzeum",
+	"állomás", "repülőtér", "buszpályaudvar", "kórház", "park", "szórakozóhely", "hotel", "lakás",
+	"ház", "kert", "udvar", "udvarház", "terasz", "társasház", "lakópark", "középület", "panelház"
+];
+
+let szo="";
+let splitelt="";
+
+function randomSzo(){
+	document.getElementById("szoinp").value="";
+	document.getElementById("box").innerHTML="";
+	szo= Math.floor(Math.random() * words.length)
+	// console.log(words[szo])
+	
+
+	var rnd = words[szo].split('').sort(function(){return 0.5-Math.random()}).join('').substring(0,words[szo].len);
+	let kevertszo = rnd.split("");
+	splitelt=words[szo].split("");
+
+	kevertszo.forEach(e => {
+		
+	document.getElementById("box").innerHTML+=`
+	<div class="border-2 rounded-sm border-slate-500 bg-slate-800 w-12 h-12 m-1 flex items-center justify-center">${e}</div>
+	`
+});
+
+	}
+randomSzo();
+
+function helyesSzo(){
+	document.getElementById("box").innerHTML="";
+	splitelt.forEach(e => {
+		
+		document.getElementById("box").innerHTML+=`
+		<div class="border-2 rounded-sm border-slate-500 bg-green-900/90 w-12 h-12 m-1 italic flex items-center justify-center">${e}</div>
+		`
+	});
+}
+
+document.getElementById("szoinp").addEventListener('keyup',(e)=>{
+			if(e.keyCode===13){
+				let beirt = document.getElementById("szoinp").value;
+				if(beirt == words[szo]){
+					helyesSzo();
+
+				}else{
+					document.getElementById("szoinp").value="";
+				}
+			}
+		})
+
+
+
+
+
+
+</script>
+
+</html>
